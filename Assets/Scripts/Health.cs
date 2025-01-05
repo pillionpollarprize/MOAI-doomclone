@@ -7,20 +7,41 @@ public class Health : MonoBehaviour
 {
     public TextMeshProUGUI healthText;
     public int maxHealth = 100;
-
+    bool isPlayer;
     [HideInInspector] public int health;
-
-    // Start is called before the first frame update
     void Start()
     {
         health = maxHealth;
-        healthText.text = health + "%";
+        if (gameObject.CompareTag("Player")) 
+        {
+            isPlayer = true;
+            healthText.text = health + "%";
+        }
+        else isPlayer = false;
     }
     public void TakeDamage(int damage)
     {
         health -= damage;
         health = Mathf.Max(health, 0); // not less than 0
         health = Mathf.Min(health, maxHealth); // not more than maxhealth
-        healthText.text = health + "%";
+
+        if (isPlayer)
+        {
+            healthText.text = health + "%";
+        }
+
+        if (health <= 0)
+        {
+
+            if (isPlayer)
+            {
+                // todo: make death animation
+                print("player is kil");
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+        }
     }
 }

@@ -7,10 +7,12 @@ public class Bullet : MonoBehaviour
     //public GameObject explosionPrefab;
     public float speed = 20f;
     public float lifetime = 2f;
+    public int damage;
     // Start is called before the first frame update
     void Start()
     {
         Invoke("SelfDestruct", lifetime);
+
     }
 
     // Update is called once per frame
@@ -29,11 +31,11 @@ public class Bullet : MonoBehaviour
                        // since player has 2 colliders, it doubles the damage. its a bandaid fix but it works for now
                        // sometimes the damage only applies 1 time instead of 2 times, but i guess it can create some unpredictable
                        // RNG for funsies. a feature if you will
-                       health.TakeDamage(10/2);
+                       health.TakeDamage(damage/2);
                     }
                     else
                     {
-                        health.TakeDamage(10);
+                        health.TakeDamage(damage);
                     }
                 }
                 else // if the bullet hit something

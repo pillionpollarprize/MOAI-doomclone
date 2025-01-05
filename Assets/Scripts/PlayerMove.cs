@@ -86,6 +86,8 @@ public class PlayerMove : MonoBehaviour
     {
         isReadyToJump = true;
     }
+
+    // temporary disable velocity for some weapons
     public void TempDisableVelocity(float duration)
     {
         rb.isKinematic = true;

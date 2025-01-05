@@ -11,13 +11,13 @@ public class Arsenal : MonoBehaviour
     [HideInInspector] public int currentWeapon;
     [Header("Pistol")]
     public GameObject pistolBulletPrefab;
-    public float pistolCooldown = 1f;
-    public float pistolMaxAmmo = 200f;
+    public float pistolCooldown;
+    public float pistolMaxAmmo;
     [HideInInspector]public int pistolID = 2;
 
     [Header("Fist")]
     public GameObject fistBulletPrefab;
-    public float fistCooldown = 2;
+    public float fistCooldown;
     [HideInInspector]public int fistID = 1;
 
 
@@ -29,18 +29,21 @@ public class Arsenal : MonoBehaviour
     {
         isReadyToShoot = true; 
         currentWeapon = 2;
+        currentCooldown = pistolCooldown;
     }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
+            currentWeapon = fistID;
             print("current weapon: 1");
-            currentWeapon = 1;
+            currentCooldown = fistCooldown;
         }
         if (Input.GetKeyDown(KeyCode.Alpha2)) 
         {
+            currentWeapon = pistolID;
             print("current weapon: 2");
-            currentWeapon = 2; 
+            currentCooldown = pistolCooldown;
         }
         if (Input.GetMouseButtonDown(0) && isReadyToShoot)
         {
@@ -55,12 +58,12 @@ public class Arsenal : MonoBehaviour
                     break;
             }
             isReadyToShoot = false;
-            Invoke("ReadyToShoot", pistolCooldown);
+            Invoke("ReadyToShoot", currentCooldown);
         }
     }
     void ShootPistol()
     {
-
+        
         Instantiate(pistolBulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
         //audsrc.pitch = Random.Range(0.8f, 1.1f);
         //audsrc.PlayOneShot(bulletSound);
