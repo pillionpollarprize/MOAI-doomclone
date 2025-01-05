@@ -68,10 +68,14 @@ public class Arsenal : MonoBehaviour
     void ShootFist()
     {
         var player = gameObject.GetComponent<PlayerMove>();
-        if (player.rb.velocity.magnitude < 0.1f && player.rb.angularVelocity.magnitude < 0.1f)
+        if (player.rb.velocity.magnitude < 9f && player.rb.angularVelocity.magnitude < 9f)
         {
             Instantiate(fistBulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
-            player.TempDisableVelocity(1);
+            player.TempDisableVelocity(0.5f);
+        }
+        else
+        {
+            print(player.rb.velocity.magnitude + "|" + player.rb.angularVelocity.magnitude);
         }
       
         //audsrc.pitch = Random.Range(0.8f, 1.1f);
