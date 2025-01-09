@@ -4,47 +4,58 @@ using UnityEngine;
 
 public class SpriteProjector : MonoBehaviour
 {
+    public Transform player;
+    public Vector3 targetPos;
+    public Vector3 targetDir;
+
     private SpriteRenderer spriteRenderer;
-    public GameObject look;
 
-    public Sprite N, W, S, E;
-
-    public void Start()
+    public float angle;
+    public int lastIndex;
+    void Start()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        player = FindObjectOfType<PlayerMove>().transform;
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+    }
+    void Update()
+    {
+        targetPos = new Vector3(player.position.x, transform.position.y, player.position.z);
+        targetDir = targetPos - transform.position;
+
+        angle = Vector3.SignedAngle(targetDir, transform.forward, Vector3.up);
+
+        // flips sprite
+        Vector3 tempScale = Vector3.one;
+        if (angle > 0) tempScale.x *= -1f;
+        spriteRenderer.transform.localScale = tempScale;
+
+        lastIndex = GetIndex(angle);
     }
 
-    public void Update()
+
+    private int GetIndex(float angle)
     {
-        var directionToPlayer = (look.transform.position - transform.position).normalized;
-        float angle = Mathf.Atan2(directionToPlayer.x, directionToPlayer.z) * Mathf.Rad2Deg;
+        // front
+        if (angle > -45f && angle <= 45f) return 0;
 
-        // normalize the angle to a range of [0, 360)
-        if (angle < 0) angle += 360;
+        // right
+        if (angle > 45f && angle <= 135f) return 1;
 
-        if (angle >= 315 || angle < 45) // north
-        {
-            spriteRenderer.sprite = N;
-        }
-        else if (angle >= 45 && angle < 135) // east
-        {
-            spriteRenderer.sprite = E;
-        }
-        else if (angle >= 135 && angle < 225) // south
-        {
-            spriteRenderer.sprite = S;
-        }
-        else if (angle >= 225 && angle < 315) // west
-        {
-            spriteRenderer.sprite = W;
-        }
-        Billboard(spriteRenderer.transform, look);
+        // back
+        if (angle > 135f || angle <= -135f) return 2;
+
+        // left
+        if (angle > -135f && angle <= -45f) return 3;
+
+        return lastIndex;
     }
 
-    private void Billboard(Transform thing, GameObject mainCamera)
+    private void OnDrawGizmosSelected()
     {
-        var dir = mainCamera.transform.position - thing.position;
-        var lookAtRotation = Quaternion.LookRotation(-dir, Vector3.up);
-        thing.rotation = Quaternion.Euler(0, lookAtRotation.eulerAngles.y, 0);
+        Gizmos.color = Color.green;
+        Gizmos.DrawRay(transform.position, transform.forward);
+
+        Gizmos.color = Color.blue;
+        Gizmos.DrawLine(transform.position, targetPos);
     }
 }

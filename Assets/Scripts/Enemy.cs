@@ -7,10 +7,14 @@ public class Enemy : MonoBehaviour
     public Transform target;
     public float speed;
     private Rigidbody rb;
+    private Animator animator;
+    private SpriteProjector spriteProj;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        spriteProj = GetComponent<SpriteProjector>();
+        animator = GetComponentInChildren<Animator>();
     }
     void FixedUpdate()
     {
