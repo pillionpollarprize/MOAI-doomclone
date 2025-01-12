@@ -32,7 +32,6 @@ public class Health : MonoBehaviour
 
         if (health <= 0)
         {
-
             if (isPlayer)
             {
                 // todo: make death animation
