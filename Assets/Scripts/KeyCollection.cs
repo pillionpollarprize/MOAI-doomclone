@@ -4,14 +4,12 @@ using UnityEngine;
 
 public class KeyCollection : MonoBehaviour
 {
-    private Arsenal arsenal;
     public GameObject keyObj;
-    // Start is called before the first frame update
 
-    // Update is called once per frame
+    private Arsenal arsenal;
     private void Start()
     {
-        arsenal = FindObjectOfType<PlayerMove>().GetComponent<Arsenal>();
+        arsenal = gameObject.GetComponent<Arsenal>();
     }
     void Update()
     {

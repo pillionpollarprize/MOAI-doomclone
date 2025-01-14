@@ -10,7 +10,7 @@ public class SpriteBillboard : MonoBehaviour
     private void Start()
     {
         target = FindObjectOfType<PlayerMove>().transform;
-        print(target != null ? "Player found" : "Player could not be found");
+        //print(target != null ? "Player found" : "Player could not be found");
     }
     // the sprites always face the player
     void Update()

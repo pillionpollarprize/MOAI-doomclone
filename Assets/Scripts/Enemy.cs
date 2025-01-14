@@ -47,7 +47,12 @@ public class Enemy : MonoBehaviour
         if (health <= 0)
         {
             Instantiate(deathObj, transform.position, transform.rotation);
-            Destroy(deathObj);
+            SelfDestruct();
         }
+    }
+    void SelfDestruct()
+    {
+        //Instantiate(explosionPrefab, transform.position, transform.rotation);
+        Destroy(gameObject);
     }
 }

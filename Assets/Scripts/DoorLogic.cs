@@ -5,30 +5,18 @@ using UnityEngine;
 public class DoorLogic : MonoBehaviour
 {
     public Type type;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     private void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.CompareTag("Player"))
         {
             var arsenal = col.gameObject.GetComponent<Arsenal>();
-            if (arsenal.hasRKeycard)
+            var notsys = col.gameObject.GetComponent<NotificationSys>();
+            if (type == Type.Red && arsenal.hasRKeycard 
+                || type == Type.Blue && arsenal.hasBKeycard
+                || type == Type.Green && arsenal.hasGKeycard)
             {
                 Destroy(gameObject);
                 print("door open :)");
-            }
-            else
-            {
-                print("door no open >:(");
             }
         }
         
