@@ -8,6 +8,7 @@ public class Arsenal : MonoBehaviour
     public Transform bulletSpawn;
     public bool isReadyToShoot;
     public int[] ammunition = new int[6];
+    public bool hasRKeycard;
     [HideInInspector] public int currentWeapon;
     [Header("Pistol")]
     public GameObject pistolBulletPrefab;

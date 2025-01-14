@@ -12,7 +12,6 @@ public class Bullet : MonoBehaviour
     void Start()
     {
         Invoke("SelfDestruct", lifetime);
-
     }
 
     // Update is called once per frame
@@ -22,20 +21,21 @@ public class Bullet : MonoBehaviour
     }
     private void OnTriggerEnter(Collider col)
     {
-            var health = col.gameObject.GetComponent<Health>();
-            {
-                if (health != null) // if the bullet hit something that has health
+        var plhealth = col.gameObject.GetComponent<Health>();
+        var enhealth = col.gameObject.GetComponent<Enemy>();
+        {
+                if (plhealth != null || enhealth != null) // if the bullet hit something that has health
                 {
                     if (col.gameObject.CompareTag("Player")) 
                     {
-                       // since player has 2 colliders, it doubles the damage. its a bandaid fix but it works for now
-                       // sometimes the damage only applies 1 time instead of 2 times, but i guess it can create some unpredictable
-                       // RNG for funsies. a feature if you will
-                       health.TakeDamage(damage/2);
+                        // since player has 2 colliders, it doubles the damage. its a bandaid fix but it works for now
+                        // sometimes the damage only applies 1 time instead of 2 times, but i guess it can create some unpredictable
+                        // RNG for funsies. a feature if you will
+                        plhealth.TakeDamage(damage/2);
                     }
-                    else
+                    else if (col.gameObject.CompareTag("Enemy"))
                     {
-                        health.TakeDamage(damage);
+                        enhealth.TakeDamage(damage);
                     }
                 }
                 else // if the bullet hit something
