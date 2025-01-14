@@ -13118,8 +13118,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 210}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: 0, y: 188.2}
+  m_SizeDelta: {x: 75, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2066734937
 MonoBehaviour:
@@ -13894,6 +13894,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerObj
       objectReference: {fileID: 0}
+    - target: {fileID: 5589140977760942417, guid: 70693fd04c1134243a50cb02672df798, type: 3}
+      propertyPath: ammoText
+      value: 
+      objectReference: {fileID: 1944505363}
     - target: {fileID: 5589140977760942417, guid: 70693fd04c1134243a50cb02672df798, type: 3}
       propertyPath: bulletSpawn
       value: 
