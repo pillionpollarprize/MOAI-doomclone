@@ -15,9 +15,22 @@ public class NotificationSys : MonoBehaviour
     {
         switch (type)
         {
-            case "REDKEY":
-                notifText.text = "You picked up a red keycard.";
+            case "HPSMAL":
+                notifText.text = "Ate delicious meat from unknown origins.";
                 break;
+            case "REDKEY":
+                notifText.text = "Picked up a red keycard.";
+                break;
+            case "BLUKEY":
+                notifText.text = "Picked up a blue keycard.";
+                break;
+            case "GREKEY":
+                notifText.text = "Picked up a green keycard.";
+                break;
+            case "RCKAMM":
+                notifText.text = "Picked up rocks.";
+                break;
+
         }
         Invoke("ResetText", 5);
     }

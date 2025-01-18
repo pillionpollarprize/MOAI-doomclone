@@ -10,13 +10,14 @@ public class Arsenal : MonoBehaviour
     public bool isReadyToShoot;
     public TextMeshProUGUI ammoText;
     public int[] ammunition = new int[6];
+    public int[] maxAmmunition = new int[6];
     public bool hasRKeycard;
     public bool hasGKeycard;
     public bool hasBKeycard;
     [Header("Pistol")]
     public GameObject pistolBulletPrefab;
     public float pistolCooldown;
-    public float pistolMaxAmmo;
+    public int pistolMaxAmmo;
     [HideInInspector]public int pistolID = 2;
 
     [Header("Fist")]
@@ -27,12 +28,12 @@ public class Arsenal : MonoBehaviour
     int currentWeapon;
     float currentCooldown;
     int gunAmmo;
-
-    //InvokeRepeating("Shoot", 0, fireRate);
     private void Start()
     {
         ammunition[1] = 1;
         ammunition[2] = 50;
+
+        maxAmmunition[2] = pistolMaxAmmo;
         gunAmmo = ammunition[2];
         isReadyToShoot = true; 
         currentWeapon = 2;
@@ -43,41 +44,34 @@ public class Arsenal : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            currentWeapon = fistID;
-            print("current weapon: 1");
-            currentCooldown = fistCooldown;
-            gunAmmo = ammunition[fistID];
-            ammoText.text = gunAmmo.ToString();
+            UpdateValues(fistID, fistCooldown);
         }
         if (Input.GetKeyDown(KeyCode.Alpha2)) 
         {
-            currentWeapon = pistolID;
-            print("current weapon: 2");
-            currentCooldown = pistolCooldown;
-            gunAmmo = ammunition[pistolID];
-            ammoText.text = gunAmmo.ToString();
+            UpdateValues(pistolID, pistolCooldown);
         }
         if (Input.GetMouseButton(0) && isReadyToShoot && gunAmmo > 0)
         {
             isReadyToShoot = false;
+            gunAmmo--;
             switch (currentWeapon){
                 case 1:
                     ShootFist();
+                    ammunition[1] = gunAmmo;
                     print("fist");
                     break;
                 case 2:
                     ShootPistol();
+                    ammunition[2] = gunAmmo;
                     print("pistol");
                     break;
             }
-            gunAmmo--;
             ammoText.text = gunAmmo.ToString();
             Invoke("ReadyToShoot", currentCooldown);
         }
     }
     void ShootPistol()
     {
-        
         Instantiate(pistolBulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
         //audsrc.pitch = Random.Range(0.8f, 1.1f);
         //audsrc.PlayOneShot(bulletSound);
@@ -85,16 +79,21 @@ public class Arsenal : MonoBehaviour
     void ShootFist()
     {
         var player = gameObject.GetComponent<PlayerMove>();
+
+        // stops player when punching
         if (player.rb.velocity.magnitude < 9f && player.rb.angularVelocity.magnitude < 9f)
         {
             Instantiate(fistBulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
             player.TempDisableVelocity(0.5f);
         }
-        else
-        {
-            print(player.rb.velocity.magnitude + "|" + player.rb.angularVelocity.magnitude);
-        }
+        //else
+        //{
+        //    print(player.rb.velocity.magnitude + "|" + player.rb.angularVelocity.magnitude);
+        //}
+
+        // fist never loses ammo
         gunAmmo++;
+
         //audsrc.pitch = Random.Range(0.8f, 1.1f);
         //audsrc.PlayOneShot(bulletSound);
     }
@@ -102,4 +101,28 @@ public class Arsenal : MonoBehaviour
     {
         isReadyToShoot = true;
     }
+    void UpdateValues(int weapID, float weapCool)
+    {
+        currentWeapon = weapID;
+        print("current weapon: " + weapID);
+        currentCooldown = weapCool;
+        gunAmmo = ammunition[weapID];
+        ammoText.text = gunAmmo.ToString();
+    }
+    public void GetAmmo(int id, int amount)
+    {
+        int ammo = ammunition[id];
+        int maxammo = maxAmmunition[id];
+        float cool = 0;
+        ammo += amount;
+        ammo = Mathf.Max(ammo, 0); // not less than 0
+        ammo = Mathf.Min(ammo, maxammo); // not more than maxhealth
+        ammunition[id] = ammo;
+        if (id == pistolID)
+        {
+            cool = pistolCooldown;
+        }
+        UpdateValues(id, cool);
+    }
+
 }

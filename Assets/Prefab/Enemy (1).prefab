@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b34fdc72c92748645808e1e7accd1ff7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 1187868887125974349, guid: 70693fd04c1134243a50cb02672df798, type: 3}
+  target: {fileID: 0}
   speed: 2
   maxHealth: 50
   deathObj: {fileID: 3999145789619657880, guid: 607e3d3355b245d4f987106e3661b27f, type: 3}
@@ -98,7 +98,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!114 &2661544248523290064
 MonoBehaviour:

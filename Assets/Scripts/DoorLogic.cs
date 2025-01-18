@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class DoorLogic : MonoBehaviour
 {
-    public Type type;
+    public Items items;
     private void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.CompareTag("Player"))
         {
             var arsenal = col.gameObject.GetComponent<Arsenal>();
             var notsys = col.gameObject.GetComponent<NotificationSys>();
-            if (type == Type.Red && arsenal.hasRKeycard 
-                || type == Type.Blue && arsenal.hasBKeycard
-                || type == Type.Green && arsenal.hasGKeycard)
+            if (items == Items.RedKey && arsenal.hasRKeycard 
+                || items == Items.BlueKey && arsenal.hasBKeycard
+                || items == Items.GreenKey && arsenal.hasGKeycard)
             {
                 Destroy(gameObject);
                 print("door open :)");
