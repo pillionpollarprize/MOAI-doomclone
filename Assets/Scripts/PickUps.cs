@@ -20,7 +20,7 @@ public class PickUps : MonoBehaviour
                     notsys.SetNotifText("HPSMAL");
                     break;
                 case Items.rockAmmo:
-                    arsenal.GetAmmo(2, 5);
+                    arsenal.GetAmmo(2, 10);
                     notsys.SetNotifText("RCKAMM");
                     break;
                 case Items.RedKey:
