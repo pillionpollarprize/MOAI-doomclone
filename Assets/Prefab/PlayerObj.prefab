@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 5589140977760942417}
   - component: {fileID: 252460165400365237}
   - component: {fileID: 543025965161011501}
-  - component: {fileID: 8746276623034764806}
+  - component: {fileID: 5512345639005780384}
   - component: {fileID: 8769844400015438894}
   - component: {fileID: 1735908568092765132}
   - component: {fileID: 5564745468133373351}
@@ -168,8 +168,8 @@ MonoBehaviour:
   healthText: {fileID: 0}
   maxHealth: 100
   health: 0
---- !u!65 &8746276623034764806
-BoxCollider:
+--- !u!136 &5512345639005780384
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -186,8 +186,10 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.8, y: 1.8, z: 0.8}
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 2.01
+  m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &8769844400015438894
 BoxCollider:

@@ -8,7 +8,7 @@ public class PickUps : MonoBehaviour
     public Items items;
     private void OnTriggerEnter(Collider col)
     {
-        if (col.gameObject.CompareTag("Player"))
+        if (col.gameObject.CompareTag("Player") && col.GetType().ToString().Equals("UnityEngine.CapsuleCollider"))
         {
             var arsenal = col.gameObject.GetComponent<Arsenal>();
             var notsys = col.gameObject.GetComponent<NotificationSys>();
@@ -36,8 +36,10 @@ public class PickUps : MonoBehaviour
                     notsys.SetNotifText("GREKEY");
                     break;
             }
+            print("picked up");
+            Destroy(gameObject);
         }
-        Destroy(gameObject);
+        
     }
 }
 public enum Items

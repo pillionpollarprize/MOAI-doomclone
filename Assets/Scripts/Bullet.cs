@@ -21,27 +21,31 @@ public class Bullet : MonoBehaviour
     {
         var plhealth = col.gameObject.GetComponent<Health>();
         var enhealth = col.gameObject.GetComponent<Enemy>();
+        // if the bullet hits something with health and the correct collider
+        if (plhealth != null || enhealth != null && col.GetType().ToString().Equals("UnityEngine.CapsuleCollider"))
         {
-                if (plhealth != null || enhealth != null) // if the bullet hit something that has health
-                {
-                    if (col.gameObject.CompareTag("Player")) 
-                    {
-                        // since player has 2 colliders, it doubles the damage. its a bandaid fix but it works for now
-                        // sometimes the damage only applies 1 time instead of 2 times, but i guess it can create some unpredictable
-                        // RNG for funsies. a feature if you will
-                        plhealth.TakeDamage(damage/2);
-                    }
-                    else if (col.gameObject.CompareTag("Enemy"))
-                    {
-                        enhealth.TakeDamage(damage);
-                    }
-                }
-                else // if the bullet hit something
-                {
-                    SelfDestruct();
-                }
+            if (col.gameObject.CompareTag("Player"))
+            {
+                // since player has 2 colliders, it doubles the damage. its a bandaid fix but it works for now
+                // sometimes the damage only applies 1 time instead of 2 times, but i guess it can create some unpredictable
+                // RNG for funsies. a feature if you will
+                plhealth.TakeDamage(damage / 2);
+            }
+            else if (col.gameObject.CompareTag("Enemy"))
+            {
+                enhealth.TakeDamage(damage);
             }
             SelfDestruct();
+        }
+        // this fixes the interfiering with the box collider
+        else if (col.GetType().ToString().Equals("UnityEngine.BoxCollider"))
+        {
+            // :)
+        }
+        else // if it hits something
+        {
+            SelfDestruct();
+        }
         
     }
     void SelfDestruct()

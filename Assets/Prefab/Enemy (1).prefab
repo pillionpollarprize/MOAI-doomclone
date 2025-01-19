@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4145465346037365743}
   - component: {fileID: 1739793433944830726}
+  - component: {fileID: 5765564261988136432}
   - component: {fileID: 640502763603474414}
   - component: {fileID: 667050016496818905}
   - component: {fileID: 2661544248523290064}
@@ -48,14 +49,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b34fdc72c92748645808e1e7accd1ff7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemystate: 0
   target: {fileID: 0}
   speed: 2
   maxHealth: 50
   idle: {fileID: 9100000, guid: a8d2021801137744caa1994e6fe4084d, type: 2}
   walk: {fileID: 9100000, guid: 6465f047adc38024c9ebbca6e55ef280, type: 2}
   deathObj: {fileID: 3999145789619657880, guid: 607e3d3355b245d4f987106e3661b27f, type: 3}
---- !u!65 &640502763603474414
-BoxCollider:
+--- !u!136 &5765564261988136432
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -72,8 +74,31 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 2.2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &640502763603474414
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 305100724523545297}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2, y: 2.2, z: 0.8}
+  m_Size: {x: 25, y: 0.1, z: 25}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &667050016496818905
 Rigidbody:

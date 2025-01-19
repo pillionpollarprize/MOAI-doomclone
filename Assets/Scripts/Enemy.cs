@@ -17,6 +17,7 @@ public class Enemy : MonoBehaviour
     private Rigidbody rb;
     private Animator animator;
     private SpriteProjector spriteProj;
+    private BoxCollider detect;
 
     int health;
     void Start()
@@ -24,6 +25,7 @@ public class Enemy : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         spriteProj = GetComponent<SpriteProjector>();
         animator = GetComponentInChildren<Animator>();
+        detect = GetComponent<BoxCollider>();
         health = maxHealth;
         enemystate = EnemyState.Idle;
     }
@@ -38,6 +40,13 @@ public class Enemy : MonoBehaviour
         if (enemystate == EnemyState.Walk)
         {
             animator.runtimeAnimatorController = walk;
+        }
+    }
+    private void OnTriggerEnter(Collider col)
+    {
+        if (col.GetType().ToString().Equals("UnityEngine.BoxCollider") && col.gameObject.CompareTag("Player"))
+        {
+            enemystate = EnemyState.Walk;
         }
     }
     void FixedUpdate()

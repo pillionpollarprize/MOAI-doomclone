@@ -18,6 +18,7 @@ public class Arsenal : MonoBehaviour
     public GameObject pistolBulletPrefab;
     public float pistolCooldown;
     public int pistolMaxAmmo;
+    public TextMeshProUGUI ammunitionPistolText;
     [HideInInspector]public int pistolID = 2;
 
     [Header("Fist")]
@@ -39,6 +40,7 @@ public class Arsenal : MonoBehaviour
         currentWeapon = 2;
         currentCooldown = pistolCooldown;
         ammoText.text = gunAmmo.ToString();
+        ammunitionPistolText.text = ammunition[2].ToString() + "/" + maxAmmunition[2].ToString();
     }
     private void Update()
     {
@@ -58,23 +60,22 @@ public class Arsenal : MonoBehaviour
                 case 1:
                     ShootFist();
                     ammunition[1] = gunAmmo;
+                    UpdateValues(fistID, fistCooldown);
                     print("fist");
                     break;
                 case 2:
                     ShootPistol();
                     ammunition[2] = gunAmmo;
+                    UpdateValues(pistolID, pistolCooldown);
                     print("pistol");
                     break;
             }
-            ammoText.text = gunAmmo.ToString();
             Invoke("ReadyToShoot", currentCooldown);
         }
     }
     void ShootPistol()
     {
         Instantiate(pistolBulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
-        //audsrc.pitch = Random.Range(0.8f, 1.1f);
-        //audsrc.PlayOneShot(bulletSound);
     }
     void ShootFist()
     {
@@ -93,9 +94,6 @@ public class Arsenal : MonoBehaviour
 
         // fist never loses ammo
         gunAmmo++;
-
-        //audsrc.pitch = Random.Range(0.8f, 1.1f);
-        //audsrc.PlayOneShot(bulletSound);
     }
     void ReadyToShoot()
     {
@@ -108,6 +106,7 @@ public class Arsenal : MonoBehaviour
         currentCooldown = weapCool;
         gunAmmo = ammunition[weapID];
         ammoText.text = gunAmmo.ToString();
+        ammunitionPistolText.text = ammunition[2].ToString() + "/" + maxAmmunition[2].ToString();
     }
     public void GetAmmo(int id, int amount)
     {

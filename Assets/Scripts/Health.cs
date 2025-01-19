@@ -6,12 +6,18 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     public TextMeshProUGUI healthText;
+    public TextMeshProUGUI armorText;
     public int maxHealth = 100;
+    public int maxArmor = 100;
     [HideInInspector] public int health;
+    [HideInInspector] public int armor;
     void Start()
     {
         health = maxHealth;
         healthText.text = health + "%";
+
+        armor = 0;
+        armorText.text = armor + "%";
     }
     public void TakeDamage(int damage)
     {
