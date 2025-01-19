@@ -1,12 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Animations;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    public EnemyState enemystate;
     public Transform target;
     public float speed;
     public int maxHealth = 100;
+    
+    public RuntimeAnimatorController idle;
+    public RuntimeAnimatorController walk;
 
     public GameObject deathObj;
     private Rigidbody rb;
@@ -20,10 +25,20 @@ public class Enemy : MonoBehaviour
         spriteProj = GetComponent<SpriteProjector>();
         animator = GetComponentInChildren<Animator>();
         health = maxHealth;
+        enemystate = EnemyState.Idle;
     }
     private void Update()
     {
         animator.SetFloat("spriteRotation", spriteProj.lastIndex);
+        if (enemystate == EnemyState.Idle)
+        {
+            // this sets the animator's controller
+            animator.runtimeAnimatorController = idle;
+        }
+        if (enemystate == EnemyState.Walk)
+        {
+            animator.runtimeAnimatorController = walk;
+        }
     }
     void FixedUpdate()
     {
@@ -33,9 +48,11 @@ public class Enemy : MonoBehaviour
         Quaternion rotation = Quaternion.LookRotation(targetRotation);
         transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 10 * Time.deltaTime);
 
-        var targetPosition = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
-        rb.MovePosition(targetPosition);
-        
+        if (enemystate == EnemyState.Walk)
+        {
+            var targetPosition = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+            rb.MovePosition(targetPosition);
+        }
     }
     public void TakeDamage(int damage)
     {
@@ -55,4 +72,10 @@ public class Enemy : MonoBehaviour
         //Instantiate(explosionPrefab, transform.position, transform.rotation);
         Destroy(gameObject);
     }
+}
+public enum EnemyState
+{
+    Idle,
+    Walk,
+    Attack
 }

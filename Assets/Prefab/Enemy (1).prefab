@@ -51,6 +51,8 @@ MonoBehaviour:
   target: {fileID: 0}
   speed: 2
   maxHealth: 50
+  idle: {fileID: 9100000, guid: a8d2021801137744caa1994e6fe4084d, type: 2}
+  walk: {fileID: 9100000, guid: 6465f047adc38024c9ebbca6e55ef280, type: 2}
   deathObj: {fileID: 3999145789619657880, guid: 607e3d3355b245d4f987106e3661b27f, type: 3}
 --- !u!65 &640502763603474414
 BoxCollider:

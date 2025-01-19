@@ -46,6 +46,8 @@ GameObject:
   - component: {fileID: 543025965161011501}
   - component: {fileID: 8746276623034764806}
   - component: {fileID: 8769844400015438894}
+  - component: {fileID: 1735908568092765132}
+  - component: {fileID: 5564745468133373351}
   m_Layer: 0
   m_Name: PlayerObj
   m_TagString: Player
@@ -113,8 +115,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletSpawn: {fileID: 0}
   isReadyToShoot: 0
+  ammoText: {fileID: 0}
   ammunition: 000000000000000000000000000000000000000000000000
-  currentWeapon: 0
+  maxAmmunition: 000000000000000000000000000000000000000000000000
+  hasRKeycard: 0
+  hasGKeycard: 0
+  hasBKeycard: 0
   pistolBulletPrefab: {fileID: 1259465325850789790, guid: 0b422dd60c7a96d4b9a19d61d2eccaa8, type: 3}
   pistolCooldown: 0.4
   pistolMaxAmmo: 200
@@ -204,6 +210,32 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1.7, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1735908568092765132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4072954739151287067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc2dbc302a0af0648b3cee1b93558666, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  notifText: {fileID: 0}
+--- !u!114 &5564745468133373351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4072954739151287067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb27942a28bfcf84ba669eac2a67caf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  keyObj: {fileID: 0}
 --- !u!1 &4463471007464920895
 GameObject:
   m_ObjectHideFlags: 0
